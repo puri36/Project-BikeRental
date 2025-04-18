@@ -70,9 +70,6 @@ jobs:
         name: my-build-package
         path: dist/*.whl
         retention-days: 1
-
-  - name: Check Docker secrets
-    run: echo "Docker username: ${{ secrets.DOCKER_BIKE_USERNAME }}; Docker token: ${{ secrets.DOCKER_BIKE }}"
   push-image:
     needs: [train, test, build]
     runs-on: ubuntu-latest
