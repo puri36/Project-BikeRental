@@ -70,7 +70,7 @@ jobs:
         name: my-build-package
         path: dist/*.whl
         retention-days: 1
- # Add this debugging step here
+
   - name: Check Docker secrets
     run: echo "Docker username: ${{ secrets.DOCKER_BIKE_USERNAME }}; Docker token: ${{ secrets.DOCKER_BIKE }}"
   push-image:
