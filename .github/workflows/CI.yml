@@ -85,19 +85,19 @@ jobs:
 
     - name: Login to Docker hub
       env:
-        DOCKER_USER: ${{ secrets.DOCKER_puri86 }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASS_TOKEN }}
-      run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
+        DOCKER_USER: ${{ secrets.BIKE_USERNAME}}
+        DOCKER_PASSWORD: ${{ secrets.BIKE }}
+      run: docker login -u BIKE_USERNAME -p BIKE 
 
     - name: Build the Docker image for Fastapi app
       env:
-        DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
-      run: docker build . -f Dockerfile -t $DOCKER_USER/bikeshare-fastapi:latest
+        DOCKER_USER: ${{ secrets.BIKE_USERNAME }}
+      run: docker build . -f Dockerfile -t BIKE_USERNAME/bikeshare-fastapi:latest
 
     - name: Push the Docker Image
       env:
-        DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
-      run: docker push $DOCKER_USER/bikeshare-fastapi
+        DOCKER_USER: ${{ secrets.BIKE_USERNAME }}
+      run: docker push BIKE_USERNAME/bikeshare-fastapi
 
     - name: Logout to Docker hub
       run: docker logout
