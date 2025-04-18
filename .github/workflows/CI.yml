@@ -70,6 +70,7 @@ jobs:
         name: my-build-package
         path: dist/*.whl
         retention-days: 1
+
   push-image:
     needs: [train, test, build]
     runs-on: ubuntu-latest
@@ -84,20 +85,19 @@ jobs:
 
     - name: Login to Docker hub
       env:
-        DOCKER_USER: ${{ secrets.DOCKER_BIKE_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_BIKE }}
-      run: run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
+        DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASS_TOKEN }}
+      run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
 
     - name: Build the Docker image for Fastapi app
       env:
-        DOCKER_USER: ${{ secrets.DOCKER_BIKE_USERNAME }}
+        DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
       run: docker build . -f Dockerfile -t $DOCKER_USER/bikeshare-fastapi:latest
 
     - name: Push the Docker Image
       env:
-        DOCKER_USER: ${{ secrets.DOCKER_BIKE_USERNAME }}
+        DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
       run: docker push $DOCKER_USER/bikeshare-fastapi
 
     - name: Logout to Docker hub
       run: docker logout
-
