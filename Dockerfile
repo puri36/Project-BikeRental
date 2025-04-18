@@ -5,7 +5,7 @@ FROM python:3.10-slim
 ADD /bike_sharing_api /bike_sharing_api/
 
 # specify working directory
-WORKDIR /bikeshare_model_api
+WORKDIR /bike_sharing_api
 
 # update pip
 RUN pip install --upgrade pip
